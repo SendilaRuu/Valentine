@@ -1,256 +1,238 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will You Be My Valentine? ❤️</title>
+<title>A little surprise for you ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{
-  width:100%; height:100%;
-  overflow:hidden;
-  font-family:'Poppins',sans-serif;
-  background: linear-gradient(45deg,#ff9a9e,#fad0c4,#ffecd2,#fcb69f);
-  background-size: 600% 600%;
-  animation:gradientBG 25s ease infinite;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:white;
+
+body{
+height:100vh;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+background: radial-gradient(circle at top,#1a001f,#090010,#000);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
-@keyframes gradientBG{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+/* STARS */
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+opacity:.7;
+animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+from{opacity:.2;}
+to{opacity:1;}
 }
 
-/* glass card */
+/* CARD */
 .card{
-  backdrop-filter: blur(25px);
-  background: rgba(255,255,255,0.12);
-  padding:60px 45px;
-  border-radius:35px;
-  border: 2px solid rgba(255,255,255,0.2);
-  box-shadow:0 0 80px rgba(255,255,255,0.35);
-  max-width:450px;
-  text-align:center;
-  z-index:10;
-  position:relative;
+background: rgba(255,255,255,0.06);
+backdrop-filter: blur(18px);
+border:1px solid rgba(255,255,255,0.15);
+padding:50px 35px;
+border-radius:25px;
+text-align:center;
+max-width:360px;
+box-shadow:0 0 60px rgba(255,0,130,.25);
+z-index:10;
 }
 
-/* title */
+/* TITLE */
 h1{
-  font-family:'Pacifico',cursive;
-  font-size:50px;
-  margin-bottom:20px;
-  text-shadow:0 0 40px rgba(255,255,255,0.8);
+font-family:'Great Vibes',cursive;
+font-size:42px;
+color:#ffd1f5;
+margin-bottom:20px;
 }
 
-/* typing effect text */
+/* TEXT */
 #typing{
-  font-size:22px;
-  min-height:50px;
-  margin-bottom:35px;
+min-height:70px;
+font-size:18px;
+line-height:1.6;
+color:#f5dfff;
+margin-bottom:35px;
 }
 
-/* buttons */
-button{
-  padding:18px 50px;
-  font-size:22px;
-  border:none;
-  border-radius:60px;
-  margin:12px;
-  cursor:pointer;
-  transition:0.3s;
-  z-index:20;
-  position:relative;
+/* BUTTONS */
+.btn{
+padding:14px 38px;
+border:none;
+border-radius:40px;
+font-size:18px;
+cursor:pointer;
+transition:.25s;
+margin:10px;
 }
 
 #yes{
-  background:white;
-  color:#ff2e63;
-  font-weight:bold;
-  box-shadow:0 0 25px rgba(255,255,255,0.9);
-  animation:pulse 2s infinite;
+background:linear-gradient(45deg,#ff4fa3,#ff80c8);
+color:white;
+box-shadow:0 0 25px #ff4fa3;
 }
-
 #yes:hover{
-  transform:scale(1.2);
-  box-shadow:0 0 70px white;
-}
-
-@keyframes pulse{
-  0%,100%{transform:scale(1); box-shadow:0 0 25px white;}
-  50%{transform:scale(1.1); box-shadow:0 0 60px white;}
+transform:scale(1.15);
+box-shadow:0 0 50px #ff80c8;
 }
 
 #no{
-  background:#ff2e63;
-  color:white;
-  position:absolute;
-  font-weight:bold;
-  padding:15px 30px;
-  border-radius:50%;
-  cursor:pointer;
-  transition:0.1s linear;
+background:transparent;
+border:2px solid #ff7acb;
+color:#ffb3e6;
+position:absolute;
 }
 
-/* final message */
-#finalMessage{
-  display:none;
-  font-size:28px;
-  margin-top:25px;
-  animation:fadeIn 1.5s;
-  line-height:1.5;
+/* FINAL PAGE */
+#lovePage{
+position:fixed;
+inset:0;
+background:linear-gradient(#140018,#000);
+display:none;
+justify-content:center;
+align-items:center;
+text-align:center;
+flex-direction:column;
+animation:fade 2s;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
 }
 
-/* floating hearts */
+#loveText{
+font-family:'Great Vibes',cursive;
+font-size:44px;
+color:#ffd6f3;
+max-width:600px;
+padding:20px;
+line-height:1.5;
+}
+
+/* HEARTS */
 .heart{
-  position:fixed;
-  bottom:-40px;
-  font-size:18px;
-  animation:floatUp 7s linear infinite;
-  opacity:0.8;
+position:fixed;
+font-size:20px;
+animation:float 6s linear infinite;
 }
-
-@keyframes floatUp{
-  0%{transform:translateY(0) rotate(0deg);}
-  100%{transform:translateY(-120vh) rotate(360deg);}
-}
-
-/* confetti */
-.confetti{
-  position:fixed;
-  width:12px;
-  height:12px;
-  background:white;
-  top:-10px;
-  animation:fall 3s linear forwards;
-}
-
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(720deg);}
-}
-
-/* floating love messages after YES */
-.loveMsg{
-  position:fixed;
-  font-size:25px;
-  font-weight:bold;
-  color:pink;
-  user-select:none;
-  pointer-events:none;
-  animation:loveUp 4s forwards;
-}
-
-@keyframes loveUp{
-  0%{opacity:0; transform:translateY(0) scale(0);}
-  50%{opacity:1; transform:translateY(-100px) scale(1.2);}
-  100%{opacity:0; transform:translateY(-200px) scale(1);}
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
 }
 
 </style>
+
 </head>
+
 <body>
 
 <div class="card">
-  <h1>💖 Surprise! 💖</h1>
-  <div id="typing"></div>
-  <button id="yes">YES ❤️</button>
-  <button id="no">NO 💔</button>
-  <div id="finalMessage">
-    🥰 You just made me the happiest person alive!<br>
-    💕 From now on, every day will be full of love and smiles!
-  </div>
+<h1>Hey you…</h1>
+<div id="typing"></div>
+<button id="yes" class="btn">Yes ❤️</button>
+<button id="no" class="btn">No</button>
+</div>
+
+<div id="lovePage">
+<div id="loveText">
+You didn't just press a button today...<br><br>
+You chose me.<br><br>
+And I promise, I will keep choosing you —<br>
+on your good days, your bad days,<br>
+your overthinking nights,<br>
+and your silent moments.<br><br>
+Will you be my Valentine? ❤️
+</div>
 </div>
 
 <audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f6a2c43f.mp3?filename=romantic-love-11254.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f6a2c43f.mp3?filename=romantic-love-11254.mp3" type="audio/mpeg">
 </audio>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 <script>
+
 /* EmailJS init */
 (function(){emailjs.init("PEkYFbEQxWdbV4RPK");})();
 
-/* typing effect before YES */
-const text="I made this little magic just for you… ready for a surprise? 💕";
+/* TYPEWRITER */
+const msg = "I know this is unexpected… but I wanted to do something different. So before you close this page… just read until the end 🌙";
 let i=0;
 function type(){
-  if(i<text.length){
-    document.getElementById("typing").innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(type,35);
-  }
+if(i<msg.length){
+document.getElementById("typing").innerHTML+=msg.charAt(i);
+i++;
+setTimeout(type,40);
+}
 }
 type();
 
-/* moving NO button randomly and rotate */
-const noBtn=document.getElementById("no");
-let angle=0;
-noBtn.addEventListener("mouseover",()=>{
-  const x=Math.random()*(window.innerWidth-130);
-  const y=Math.random()*(window.innerHeight-130);
-  angle+=Math.random()*720; // rotate randomly
-  noBtn.style.transform=`rotate(${angle}deg)`;
-  noBtn.style.left=x+"px";
-  noBtn.style.top=y+"px";
-});
-
-/* YES button click */
-document.getElementById("yes").addEventListener("click",function(){
-
-  document.getElementById("finalMessage").style.display="block";
-
-  /* confetti explosion */
-  for(let i=0;i<150;i++){
-    let conf=document.createElement("div");
-    conf.classList.add("confetti");
-    conf.style.left=Math.random()*100+"vw";
-    conf.style.background=`hsl(${Math.random()*360},100%,70%)`;
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),3500);
-  }
-
-  /* floating love messages */
-  for(let i=0;i<25;i++){
-    let msg=document.createElement("div");
-    msg.classList.add("loveMsg");
-    msg.style.left=Math.random()*80+"vw";
-    msg.style.bottom="0px";
-    msg.innerText="❤️ Love ❤️";
-    document.body.appendChild(msg);
-    setTimeout(()=>msg.remove(),4000);
-  }
-
-  /* SEND EMAIL */
-  emailjs.send("service_dxpfu1a","template_xo1x7t8",{
-    to_email:"sendilajayasundara@gmail.com",
-    message:"She accepted your Valentine proposal ❤️"
-  });
-});
-
-/* floating hearts in background */
-function createHeart(){
-  const heart=document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML="💖";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=Math.random()*25+10+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),7000);
+/* STARS */
+for(let i=0;i<120;i++){
+let star=document.createElement("div");
+star.className="star";
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+star.style.animationDuration=(Math.random()*2+1)+"s";
+document.body.appendChild(star);
 }
-setInterval(createHeart,200);
+
+/* NO BUTTON RUN AWAY */
+const no=document.getElementById("no");
+let attempts=0;
+no.addEventListener("mouseover",()=>{
+attempts++;
+const x=Math.random()*(window.innerWidth-120);
+const y=Math.random()*(window.innerHeight-80);
+no.style.left=x+"px";
+no.style.top=y+"px";
+no.style.transform=`rotate(${Math.random()*360}deg)`;
+
+if(attempts>6){
+no.style.display="none";
+}
+});
+
+/* YES CLICK */
+document.getElementById("yes").onclick=function(){
+
+document.querySelector(".card").style.display="none";
+document.getElementById("lovePage").style.display="flex";
+
+/* floating hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💗";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*25+15)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},250);
+
+/* SEND EMAIL */
+emailjs.send("service_dxpfu1a","template_xo1x7t8",{
+to_email:"sendilajayasundara@gmail.com",
+message:"She said YES to your Valentine ❤️"
+});
+
+};
 
 </script>
+
 </body>
 </html>
