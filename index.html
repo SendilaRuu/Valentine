@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Special Girl ❤️</title>
+<title>Will You Be My Valentine? ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  height:100vh;
-  width:100vw;
+html,body{
+  width:100%; height:100%;
   overflow:hidden;
   font-family:'Poppins',sans-serif;
-  background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f);
+  background: linear-gradient(45deg,#ff9a9e,#fad0c4,#ffecd2,#fcb69f);
   background-size: 600% 600%;
-  animation: gradientBG 20s ease infinite;
+  animation:gradientBG 25s ease infinite;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -29,74 +28,84 @@ body{
   100%{background-position:0% 50%;}
 }
 
-/* glass card center */
+/* glass card */
 .card{
   backdrop-filter: blur(25px);
   background: rgba(255,255,255,0.12);
-  padding:60px 40px;
-  border-radius:30px;
+  padding:60px 45px;
+  border-radius:35px;
   border: 2px solid rgba(255,255,255,0.2);
-  box-shadow: 0 0 60px rgba(255,255,255,0.3);
-  max-width:400px;
+  box-shadow:0 0 80px rgba(255,255,255,0.35);
+  max-width:450px;
   text-align:center;
   z-index:10;
   position:relative;
 }
 
+/* title */
 h1{
   font-family:'Pacifico',cursive;
-  font-size:48px;
-  text-shadow: 0 0 30px rgba(255,255,255,0.8);
-  margin-bottom:15px;
+  font-size:50px;
+  margin-bottom:20px;
+  text-shadow:0 0 40px rgba(255,255,255,0.8);
 }
 
+/* typing effect text */
 #typing{
   font-size:22px;
   min-height:50px;
-  margin-bottom:40px;
+  margin-bottom:35px;
 }
 
 /* buttons */
 button{
-  padding:18px 45px;
+  padding:18px 50px;
   font-size:22px;
   border:none;
-  border-radius:50px;
+  border-radius:60px;
   margin:12px;
   cursor:pointer;
   transition:0.3s;
+  z-index:20;
+  position:relative;
 }
 
 #yes{
   background:white;
   color:#ff2e63;
   font-weight:bold;
-  box-shadow:0 0 20px rgba(255,255,255,0.8);
-  animation: pulse 2s infinite;
+  box-shadow:0 0 25px rgba(255,255,255,0.9);
+  animation:pulse 2s infinite;
 }
 
 #yes:hover{
   transform:scale(1.2);
-  box-shadow:0 0 60px white;
+  box-shadow:0 0 70px white;
 }
 
 @keyframes pulse{
-  0%,100%{transform:scale(1); box-shadow:0 0 20px white;}
-  50%{transform:scale(1.1); box-shadow:0 0 50px white;}
+  0%,100%{transform:scale(1); box-shadow:0 0 25px white;}
+  50%{transform:scale(1.1); box-shadow:0 0 60px white;}
 }
 
 #no{
   background:#ff2e63;
   color:white;
   position:absolute;
+  font-weight:bold;
+  padding:15px 30px;
+  border-radius:50%;
+  cursor:pointer;
+  transition:0.1s linear;
 }
 
 /* final message */
 #finalMessage{
   display:none;
   font-size:28px;
-  margin-top:30px;
+  margin-top:25px;
   animation:fadeIn 1.5s;
+  line-height:1.5;
 }
 
 @keyframes fadeIn{
@@ -104,11 +113,11 @@ button{
   to{opacity:1; transform:translateY(0);}
 }
 
-/* floating hearts and sparkles */
+/* floating hearts */
 .heart{
   position:fixed;
   bottom:-40px;
-  font-size:20px;
+  font-size:18px;
   animation:floatUp 7s linear infinite;
   opacity:0.8;
 }
@@ -118,6 +127,7 @@ button{
   100%{transform:translateY(-120vh) rotate(360deg);}
 }
 
+/* confetti */
 .confetti{
   position:fixed;
   width:12px;
@@ -130,21 +140,36 @@ button{
 @keyframes fall{
   to{transform:translateY(110vh) rotate(720deg);}
 }
+
+/* floating love messages after YES */
+.loveMsg{
+  position:fixed;
+  font-size:25px;
+  font-weight:bold;
+  color:pink;
+  user-select:none;
+  pointer-events:none;
+  animation:loveUp 4s forwards;
+}
+
+@keyframes loveUp{
+  0%{opacity:0; transform:translateY(0) scale(0);}
+  50%{opacity:1; transform:translateY(-100px) scale(1.2);}
+  100%{opacity:0; transform:translateY(-200px) scale(1);}
+}
+
 </style>
 </head>
-
 <body>
 
 <div class="card">
-  <h1>Hey Beautiful 💖</h1>
+  <h1>💖 Surprise! 💖</h1>
   <div id="typing"></div>
-
   <button id="yes">YES ❤️</button>
   <button id="no">NO 💔</button>
-
   <div id="finalMessage">
-    You just made me the happiest person alive 🥺❤️<br>
-    I promise to take care of your smile forever 💕
+    🥰 You just made me the happiest person alive!<br>
+    💕 From now on, every day will be full of love and smiles!
   </div>
 </div>
 
@@ -154,14 +179,11 @@ button{
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-
 /* EmailJS init */
-(function(){
-  emailjs.init("PEkYFbEQxWdbV4RPK"); // <-- Replace with your public key
-})();
+(function(){emailjs.init("PEkYFbEQxWdbV4RPK");})();
 
-/* typing effect */
-const text="I created this just for you… because you are my everything 💕";
+/* typing effect before YES */
+const text="I made this little magic just for you… ready for a surprise? 💕";
 let i=0;
 function type(){
   if(i<text.length){
@@ -172,28 +194,42 @@ function type(){
 }
 type();
 
-/* moving NO button */
+/* moving NO button randomly and rotate */
 const noBtn=document.getElementById("no");
+let angle=0;
 noBtn.addEventListener("mouseover",()=>{
   const x=Math.random()*(window.innerWidth-130);
   const y=Math.random()*(window.innerHeight-130);
+  angle+=Math.random()*720; // rotate randomly
+  noBtn.style.transform=`rotate(${angle}deg)`;
   noBtn.style.left=x+"px";
   noBtn.style.top=y+"px";
 });
 
-/* YES button */
+/* YES button click */
 document.getElementById("yes").addEventListener("click",function(){
 
   document.getElementById("finalMessage").style.display="block";
 
   /* confetti explosion */
-  for(let i=0;i<120;i++){
+  for(let i=0;i<150;i++){
     let conf=document.createElement("div");
     conf.classList.add("confetti");
     conf.style.left=Math.random()*100+"vw";
     conf.style.background=`hsl(${Math.random()*360},100%,70%)`;
     document.body.appendChild(conf);
     setTimeout(()=>conf.remove(),3500);
+  }
+
+  /* floating love messages */
+  for(let i=0;i<25;i++){
+    let msg=document.createElement("div");
+    msg.classList.add("loveMsg");
+    msg.style.left=Math.random()*80+"vw";
+    msg.style.bottom="0px";
+    msg.innerText="❤️ Love ❤️";
+    document.body.appendChild(msg);
+    setTimeout(()=>msg.remove(),4000);
   }
 
   /* SEND EMAIL */
@@ -203,7 +239,7 @@ document.getElementById("yes").addEventListener("click",function(){
   });
 });
 
-/* floating hearts generator */
+/* floating hearts in background */
 function createHeart(){
   const heart=document.createElement("div");
   heart.classList.add("heart");
@@ -213,9 +249,8 @@ function createHeart(){
   document.body.appendChild(heart);
   setTimeout(()=>heart.remove(),7000);
 }
-setInterval(createHeart,250);
+setInterval(createHeart,200);
 
 </script>
-
 </body>
 </html>
