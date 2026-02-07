@@ -14,7 +14,7 @@ font-family:'Poppins',sans-serif;
 overflow:hidden;
 }
 
-/* ---------------- LOCK SCREEN ---------------- */
+/* LOCK SCREEN */
 
 #lockScreen{
 position:fixed;
@@ -44,7 +44,6 @@ width:100%;
 font-family:'Great Vibes',cursive;
 font-size:34px;
 color:#ffc0e0;
-margin-bottom:8px;
 }
 
 .lockBox input{
@@ -70,7 +69,7 @@ cursor:pointer;
 width:100%;
 }
 
-/* ---------------- PROPOSAL ---------------- */
+/* PROPOSAL PAGE */
 
 #proposal{
 display:none;
@@ -96,52 +95,62 @@ padding:20px;
 h1{
 font-family:'Great Vibes',cursive;
 font-size:clamp(34px,7vw,60px);
-margin-bottom:25px;
+margin-bottom:15px;
 text-shadow:0 0 20px rgba(255,255,255,0.7);
 }
 
-/* BUTTON AREA */
-.buttons{
-position:relative;
-width:100%;
-height:260px;
-display:flex;
-justify-content:center;
-align-items:center;
+.proposalText{
+max-width:420px;
+margin-bottom:25px;
+line-height:1.5;
+font-size:16px;
 }
 
-/* YES */
+.buttons{
+display:flex;
+gap:30px;
+justify-content:center;
+align-items:center;
+margin-top:10px;
+}
+
+/* YES BUTTON */
 #yes{
 padding:15px 40px;
 font-size:20px;
 border:none;
 border-radius:50px;
-background:white;
+background:linear-gradient(145deg,#ffffff,#ffd9e8);
 color:#ff2e63;
 font-weight:bold;
-box-shadow:0 0 30px white;
-z-index:2;
 cursor:pointer;
+box-shadow:0 6px 0 #d49bab, 0 12px 25px rgba(0,0,0,.25);
+transition:transform .15s, box-shadow .15s;
+}
+#yes:active{
+transform:translateY(4px);
+box-shadow:0 2px 0 #d49bab;
 }
 
-/* RUNNING NO */
+/* NO BUTTON */
 #no{
 padding:15px 40px;
 font-size:18px;
 border:none;
 border-radius:50px;
-background:#ff2e63;
+background:linear-gradient(145deg,#ff2e63,#ff5c8a);
 color:white;
-position:fixed;
-left:60%;
-top:70%;
-transform:translate(-50%,-50%);
-z-index:5;
 cursor:pointer;
-transition:transform .25s linear;
+box-shadow:0 6px 0 #b3123f, 0 12px 25px rgba(0,0,0,.25);
+transition:transform .2s;
+display:none;
+}
+#no:active{
+transform:translateY(4px);
+box-shadow:0 2px 0 #b3123f;
 }
 
-/* ---------------- LOVE PAGE ---------------- */
+/* LOVE PAGE */
 
 #lovePage{
 display:none;
@@ -186,7 +195,7 @@ opacity:0;
   <div class="lockBox">
     <h2>Enter Our Secret Date ❤️</h2>
     <p style="opacity:.8;font-size:14px;">(a day important to us)</p>
-    <input type="password" id="code" placeholder="yyyy.mm.dd">
+    <input type="password" id="code" placeholder="2024.11.04">
     <button onclick="checkCode()">Unlock</button>
     <p id="error" style="color:#ff9aa2;margin-top:10px;"></p>
   </div>
@@ -195,14 +204,26 @@ opacity:0;
 <!-- PROPOSAL -->
 <div id="proposal">
   <h1>Will You Be My Valentine? 💖</h1>
+
+  <div class="proposalText">
+  I didn't make this just to be cute…<br>
+  I made it because you are important to me.<br><br>
+
+  Out of everyone in this world,<br>
+  my heart chose you.<br><br>
+
+  And if I could start my days seeing your smile<br>
+  and end my nights talking to you…<br>
+  that would be more than enough happiness for me.
+  </div>
+
   <div class="buttons">
     <button id="yes">YES ❤️</button>
+    <button id="no">NO 💔</button>
   </div>
 </div>
 
-<button id="no">NO 💔</button>
-
-<!-- FINAL LOVE PAGE -->
+<!-- FINAL PAGE -->
 <div id="lovePage">
   <div id="loveText"></div>
 </div>
@@ -217,6 +238,7 @@ let code=document.getElementById("code").value;
 if(code==="2024.11.04"){
 document.getElementById("lockScreen").style.display="none";
 document.getElementById("proposal").style.display="flex";
+document.getElementById("no").style.display="inline-block";
 }else{
 document.getElementById("error").innerText="Wrong date... try again ❤️";
 }
@@ -225,32 +247,22 @@ document.getElementById("error").innerText="Wrong date... try again ❤️";
 /* RUNNING NO BUTTON */
 const no=document.getElementById("no");
 
-function escapeButton(e){
+function moveNo(){
+const padding=120;
+const maxX=window.innerWidth-padding;
+const maxY=window.innerHeight-padding;
+const x=Math.random()*maxX;
+const y=Math.random()*maxY;
+const rotate=Math.random()*360;
 
-let btnRect=no.getBoundingClientRect();
-let x=e.touches?e.touches[0].clientX:e.clientX;
-let y=e.touches?e.touches[0].clientY:e.clientY;
-
-let centerX=btnRect.left+btnRect.width/2;
-let centerY=btnRect.top+btnRect.height/2;
-
-let dx=centerX-x;
-let dy=centerY-y;
-let distance=Math.sqrt(dx*dx+dy*dy);
-
-if(distance<140){
-let newX=Math.random()*(window.innerWidth-120);
-let newY=Math.random()*(window.innerHeight-80);
-let rotate=Math.random()*360;
-
-no.style.left=newX+"px";
-no.style.top=newY+"px";
-no.style.transform=`translate(-50%,-50%) rotate(${rotate}deg) scale(${1+Math.random()*0.4})`;
-}
+no.style.position="fixed";
+no.style.left=x+"px";
+no.style.top=y+"px";
+no.style.transform=`rotate(${rotate}deg) scale(${1+Math.random()*0.3})`;
 }
 
-document.addEventListener("mousemove",escapeButton);
-document.addEventListener("touchmove",escapeButton);
+no.addEventListener("mouseenter",moveNo);
+no.addEventListener("touchstart",moveNo);
 
 /* YES CLICK */
 document.getElementById("yes").onclick=function(){
@@ -259,7 +271,7 @@ document.getElementById("proposal").style.display="none";
 document.getElementById("no").style.display="none";
 document.getElementById("lovePage").style.display="flex";
 
-/* LOVE LETTER TYPING */
+/* LOVE LETTER */
 const text=`From the moment you walked into my life,
 everything felt softer… calmer… brighter.
 
@@ -285,8 +297,8 @@ setTimeout(type,35);
 }}
 type();
 
-/* EMOJIS FLOAT */
-const emojis=["💋","💘","💞","💓","💖"];
+/* FLOATING EMOJIS */
+const emojis=["💋","💘","💞","💖","💕"];
 setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
@@ -300,7 +312,7 @@ setTimeout(()=>h.remove(),7000);
 /* EMAIL */
 emailjs.send("service_dxpfu1a","template_ho3k8dp",{
 to_email:"sendilajayasundara@gmail.com",
-message:"She pressed YES on the Valentine website ❤️"
+message:"She pressed YES ❤️🔥"
 });
 };
 </script>
