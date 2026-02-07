@@ -1,222 +1,256 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will You Be My Valentine? ❤️</title>
+<title>A little surprise ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-html, body{
-  width:100%; height:100%;
-  overflow:hidden;
-  font-family:'Poppins',sans-serif;
-  background: linear-gradient(135deg,#ff758c,#ff7eb3,#ff9a9e,#ffc3a0);
-  background-size: 400% 400%;
-  animation:bgMove 20s ease infinite;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:white;
+body{
+height:100vh;
+font-family:'Poppins',sans-serif;
+overflow:hidden;
 }
 
-@keyframes bgMove{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+/* ---------------- LOCK SCREEN ---------------- */
+
+#lockScreen{
+position:fixed;
+inset:0;
+background: radial-gradient(circle at center,#300012,#000);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+text-align:center;
 }
 
-/* CARD */
-.card{
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
-  border-radius:25px;
-  border: 2px solid rgba(255,255,255,0.2);
-  padding:50px 35px;
-  text-align:center;
-  max-width:380px;
-  box-shadow:0 0 50px rgba(255,0,130,0.25);
-  z-index:10;
-  position:relative;
+.lockBox{
+background:rgba(255,0,80,0.08);
+border:1px solid rgba(255,0,120,0.3);
+padding:40px 30px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,0,120,0.3);
 }
 
-/* TITLE */
+.lockBox h2{
+font-family:'Great Vibes',cursive;
+font-size:38px;
+margin-bottom:15px;
+color:#ffb3d9;
+}
+
+.lockBox input{
+padding:14px;
+width:220px;
+border:none;
+border-radius:30px;
+text-align:center;
+font-size:18px;
+outline:none;
+margin-top:10px;
+}
+
+.lockBox button{
+margin-top:15px;
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:#ff2e63;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* ---------------- PROPOSAL PAGE ---------------- */
+
+#proposal{
+display:none;
+position:fixed;
+inset:0;
+background: linear-gradient(135deg,#ff758c,#ff7eb3,#ffc3a0);
+background-size:400% 400%;
+animation:bg 20s infinite;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+color:white;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
 h1{
-  font-family:'Great Vibes',cursive;
-  font-size:40px;
-  color:#ffe0f0;
-  margin-bottom:20px;
-  text-shadow:0 0 15px rgba(255,255,255,0.6);
+font-family:'Great Vibes',cursive;
+font-size:48px;
+margin-bottom:20px;
 }
 
-/* TEXT */
-#typing{
-  min-height:70px;
-  font-size:18px;
-  line-height:1.6;
-  color:#fff0f5;
-  margin-bottom:30px;
+.buttons{
+position:relative;
 }
 
-/* BUTTONS */
 .btn{
-  padding:15px 40px;
-  border:none;
-  border-radius:50px;
-  font-size:18px;
-  cursor:pointer;
-  margin:10px;
-  transition:.3s;
+padding:15px 40px;
+font-size:18px;
+border:none;
+border-radius:50px;
+margin:10px;
+cursor:pointer;
 }
 
 #yes{
-  background: linear-gradient(45deg,#ff4fa3,#ff80c8);
-  color:white;
-  box-shadow:0 0 20px #ff4fa3;
-  font-weight:bold;
-  animation:pulse 2s infinite;
-}
-#yes:hover{
-  transform:scale(1.15);
-  box-shadow:0 0 50px #ff80c8;
+background:white;
+color:#ff2e63;
+font-weight:bold;
+box-shadow:0 0 25px white;
+animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
-  0%,100%{transform:scale(1); box-shadow:0 0 20px #ff4fa3;}
-  50%{transform:scale(1.1); box-shadow:0 0 50px #ff80c8;}
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.1);}
 }
 
 #no{
-  background: transparent;
-  border:2px solid #ffb3e6;
-  color:#ffb3e6;
-  position:absolute;
-  font-weight:bold;
-  border-radius:50px;
-  padding:12px 28px;
-  cursor:pointer;
-  transition: transform 0.3s ease;
+background:#ff2e63;
+color:white;
+position:absolute;
 }
 
-/* LOVE PAGE AFTER YES */
+/* ---------------- LOVE PAGE ---------------- */
+
 #lovePage{
-  position:fixed;
-  inset:0;
-  background: linear-gradient(135deg,#ff758c,#ff7eb3,#ff9a9e,#ffc3a0);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  flex-direction:column;
-  animation:fade 2s;
-  overflow:hidden;
-}
-
-@keyframes fade{
-  from{opacity:0;}
-  to{opacity:1;}
+display:none;
+position:fixed;
+inset:0;
+background:linear-gradient(180deg,#ff4fa3,#ff80c8,#ffc3a0);
+color:white;
+justify-content:center;
+align-items:center;
+text-align:center;
+flex-direction:column;
+padding:25px;
 }
 
 #loveText{
-  font-family:'Great Vibes',cursive;
-  font-size:36px;
-  color:#fff0f5;
-  padding:20px;
-  line-height:1.5;
+font-family:'Great Vibes',cursive;
+font-size:34px;
+line-height:1.6;
+max-width:600px;
 }
 
-/* FLOATING HEARTS */
+/* floating hearts */
 .heart{
-  position:fixed;
-  font-size:22px;
-  animation:floatUp 6s linear infinite;
-}
-@keyframes floatUp{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-10vh);}
+position:fixed;
+font-size:22px;
+animation:float 6s linear infinite;
 }
 
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
 </style>
 </head>
+
 <body>
 
-<div class="card">
-<h1>Hey Beautiful 💖</h1>
-<div id="typing"></div>
-<button id="yes" class="btn">Yes ❤️</button>
-<button id="no" class="btn">No 💔</button>
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+  <div class="lockBox">
+    <h2>Enter Our Secret Date ❤️</h2>
+    <p>(Hint: a very special day)</p>
+    <input type="password" id="code" placeholder="dd.mm.yy">
+    <br>
+    <button onclick="checkCode()">Unlock</button>
+    <p id="error" style="color:#ff9aa2;margin-top:10px;"></p>
+  </div>
 </div>
 
+<!-- PROPOSAL -->
+<div id="proposal">
+  <h1>Will You Be My Valentine? 💖</h1>
+  <div class="buttons">
+    <button id="yes" class="btn">YES ❤️</button>
+    <button id="no" class="btn">NO 💔</button>
+  </div>
+</div>
+
+<!-- FINAL LOVE PAGE -->
 <div id="lovePage">
-<div id="loveText">
-You didn’t just click a button…<br><br>
-You chose me.<br>
-And I will always choose you ❤️<br>
-Every day, every moment.<br>
-Happy Valentine’s Day! 💕
+  <div id="loveText">
+    From the moment you walked into my life,<br><br>
+    everything felt softer… calmer… brighter.<br><br>
+    I don't just want to love you on the easy days,<br>
+    I want to be there on your overthinking nights,<br>
+    your silent moments,<br>
+    and the days you feel unsure about yourself.<br><br>
+    So today I'm not asking for a moment…<br>
+    I'm asking for us. ❤️
+  </div>
 </div>
-</div>
-
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f6a2c43f.mp3?filename=romantic-love-11254.mp3" type="audio/mpeg">
-</audio>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
 (function(){emailjs.init("PEkYFbEQxWdbV4RPK");})();
 
-/* TYPEWRITER */
-const msg = "I created this special little surprise… ready for something magical?";
-let i=0;
-function type(){
-  if(i<msg.length){
-    document.getElementById("typing").innerHTML+=msg.charAt(i);
-    i++;
-    setTimeout(type,35);
-  }
+/* PASSWORD CHECK */
+function checkCode(){
+let code=document.getElementById("code").value;
+if(code==="2024.11.04"){
+document.getElementById("lockScreen").style.display="none";
+document.getElementById("proposal").style.display="flex";
+}else{
+document.getElementById("error").innerText="Wrong date... try again ❤️";
 }
-type();
+}
 
-/* NO BUTTON ZOOM + ROTATE + MOVE */
-const noBtn=document.getElementById("no");
-let attempts=0;
-noBtn.addEventListener("mouseover",()=>{
-  attempts++;
-  const x=Math.random()*(window.innerWidth-130);
-  const y=Math.random()*(window.innerHeight-130);
-  let scale=1 + Math.random()*0.5;
-  let angle=Math.random()*360;
-  noBtn.style.left=x+"px";
-  noBtn.style.top=y+"px";
-  noBtn.style.transform=`scale(${scale}) rotate(${angle}deg)`;
-  if(attempts>7) noBtn.style.display="none";
+/* NO BUTTON ESCAPE + ZOOM */
+const no=document.getElementById("no");
+no.addEventListener("mouseover",()=>{
+const x=Math.random()*(window.innerWidth-120);
+const y=Math.random()*(window.innerHeight-80);
+const scale=0.7+Math.random()*1.5;
+no.style.left=x+"px";
+no.style.top=y+"px";
+no.style.transform=`scale(${scale})`;
 });
 
 /* YES CLICK */
 document.getElementById("yes").onclick=function(){
-  document.querySelector(".card").style.display="none";
-  document.getElementById("lovePage").style.display="flex";
 
-  /* Floating hearts on screen */
-  setInterval(()=>{
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerText="💖"; // you can replace with another heart emoji she likes
-    h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(Math.random()*25+15)+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
-  },200);
+document.getElementById("proposal").style.display="none";
+document.getElementById("lovePage").style.display="flex";
 
-  /* EmailJS */
-  emailjs.send("service_dxpfu1a","template_e4lr6ni",{
-    to_email:"sendilajayasundara@gmail.com",
-    message:"She said YES to your Valentine ❤️"
-  });
+/* floating hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*25+15)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},250);
+
+/* EMAIL */
+emailjs.send("service_dxpfu1a","template_ho3k8dp",{
+to_email:"sendilajayasundara@gmail.com",
+message:"She unlocked and pressed YES ❤️"
+});
 };
-
 </script>
+
 </body>
 </html>
+```
