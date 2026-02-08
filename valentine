@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:'Poppins',sans-serif;
+background:#000;
+color:white;
+overflow:hidden;
+}
+
+/* ---------- PAGES ---------- */
+.page{
+position:fixed;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:25px;
+}
+
+.show{display:flex;}
+
+/* ---------- LOCK ---------- */
+#lock{
+background: radial-gradient(circle,#1a0010,#000);
+}
+.lockBox{
+background:rgba(255,255,255,.08);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+}
+input{
+padding:14px;
+border-radius:25px;
+border:none;
+margin-top:15px;
+text-align:center;
+font-size:17px;
+}
+button{
+padding:12px 28px;
+border:none;
+border-radius:30px;
+margin-top:15px;
+cursor:pointer;
+background:#ff2e63;
+color:white;
+}
+
+/* ---------- START PAGE ---------- */
+#start{
+background:linear-gradient(-45deg,#ff5f9e,#ff7eb3,#ffc3a0);
+background-size:400% 400%;
+animation:grad 12s infinite;
+}
+@keyframes grad{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+h1{
+font-family:'Great Vibes',cursive;
+font-size:clamp(36px,6vw,60px);
+}
+
+/* ---------- WHY PAGE ---------- */
+#why{
+background:linear-gradient(180deg,#ff4fa3,#ff80c8,#ffd6b8);
+}
+
+#typeText{
+font-family:'Great Vibes',cursive;
+font-size:clamp(24px,5vw,38px);
+max-width:700px;
+line-height:1.5;
+}
+
+/* ---------- GALLERY ---------- */
+#little{
+background:#111;
+overflow-y:auto;
+}
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+width:100%;
+max-width:900px;
+margin-top:20px;
+}
+.gallery img{
+width:100%;
+border-radius:20px;
+}
+
+/* ---------- RUNNING NO ---------- */
+#no{
+position:absolute;
+bottom:80px;
+}
+
+/* ---------- FLOATING EMOJIS ---------- */
+.heart{
+position:fixed;
+bottom:-20px;
+animation:float 7s linear forwards;
+}
+@keyframes float{
+to{transform:translateY(-110vh) rotate(360deg);opacity:0;}
+}
+
+.navBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:white;
+color:#ff2e63;
+font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- LOCK -->
+
+<div id="lock" class="page show">
+<div class="lockBox">
+<h1>Enter Our Secret Date ❤️</h1>
+<input type="password" id="code" placeholder="yyyy.mm.dd">
+<br>
+<button onclick="unlock()">Unlock</button>
+<p id="error" style="color:#ff9aa2;margin-top:10px;"></p>
+</div>
+</div>
+
+<!-- START -->
+
+<div id="start" class="page">
+<h1>Hey My Love 💕</h1>
+<p style="margin-top:10px">I made something only for you...</p>
+<button onclick="goWhy()">Start</button>
+
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/cjcWrmQ14sw?autoplay=1&loop=1&playlist=cjcWrmQ14sw"
+frameborder="0" allow="autoplay">
+</iframe>
+</div>
+
+<!-- WHY YOU MATTER -->
+
+<div id="why" class="page">
+<div id="typeText"></div>
+<button class="navBtn" onclick="goLittle()">Next →</button>
+</div>
+
+<!-- LITTLE THINGS -->
+
+<div id="little" class="page">
+<h1>Our Little Things 💘</h1>
+
+<div class="gallery">
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+</div>
+
+<p style="margin-top:20px;max-width:700px">
+Every small moment with you became a memory inside my heart.
+Even normal days became special because you were there 💋
+</p>
+
+<br>
+<iframe width="320" height="200"
+src="https://www.youtube.com/embed/VIDEOID"
+allowfullscreen></iframe>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){emailjs.init("PEkYFbEQxWdbV4RPK");})();
+
+/* unlock */
+function unlock(){
+let code=document.getElementById("code").value;
+if(code==="2024.11.04"){
+document.getElementById("lock").classList.remove("show");
+document.getElementById("start").classList.add("show");
+}else{
+document.getElementById("error").innerText="Wrong date ❤️";
+}
+}
+
+/* navigation */
+function goWhy(){
+document.getElementById("start").classList.remove("show");
+document.getElementById("why").classList.add("show");
+typeText();
+}
+
+function goLittle(){
+document.getElementById("why").classList.remove("show");
+document.getElementById("little").classList.add("show");
+}
+
+/* typing letter */
+const msg=`You are not just my girlfriend...
+You are my calm place.
+My safe place.
+My happiness on hard days.
+
+I love the way you care,
+the way you get angry,
+the way you overthink,
+and even your silence.
+
+I didn't just fall in love with you...
+I chose you. Every day. 💞`;
+
+let i=0;
+function typeText(){
+if(i<msg.length){
+document.getElementById("typeText").innerHTML+=msg.charAt(i);
+i++;
+setTimeout(typeText,35);
+}
+}
+
+/* floating emojis */
+const emojis=["💋","💘","💞","💝","💕","💖","🥺"];
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*25+18)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),7000);
+},350);
+
+/* email when she reaches last page */
+emailjs.send("service_dxpfu1a","template_ho3k8dp",{
+to_email:"sendilajayasundara@gmail.com",
+message:"She opened the Valentine Website 💘"
+});
+</script>
+
+</body>
+</html>
